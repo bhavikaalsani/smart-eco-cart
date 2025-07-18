@@ -64,32 +64,32 @@ if st.session_state.user:
                     st.session_state.history.append({"name": row['product_name'], "eco_rating": row['eco_rating']})
 
     # --------- Barcode Scanner ---------
-  with tab2:
-    st.title("📷 Scan Barcode")
-    picture = st.camera_input("Scan barcode on product")
+    with tab2:
+        st.title("📷 Scan Barcode")
+        picture = st.camera_input("Scan barcode on product")
 
-    if picture:
-        barcode_data = decode_barcode_with_zxing(picture.getvalue())
-        if barcode_data:
-            st.success(f"Scanned Barcode: {barcode_data}")
-            match = product_db[product_db['barcode'] == barcode_data]
-            if not match.empty:
-                row = match.iloc[0]
-                eco_info = f"""
-                🛒 Product: {row['product_name']} ({row['brand']})
-                🌿 Eco Rating: {row['eco_rating']}/5  
-                ♻️ Suggested Alternative: {row['eco_alternative']}
-                📦 Packaging Type: {row['packaging']}
-                💨 Carbon Footprint: {row['carbon_footprint']} kg CO₂  
-                🔁 Recyclability: {row['recyclability']}
-                💡 Eco Tip: {row['eco_tip']}
-                """
-                st.markdown(eco_info)
-                st.session_state.history.append({"name": row['product_name'], "eco_rating": row['eco_rating']})
+        if picture:
+            barcode_data = decode_barcode_with_zxing(picture.getvalue())
+            if barcode_data:
+                st.success(f"Scanned Barcode: {barcode_data}")
+                match = product_db[product_db['barcode'] == barcode_data]
+                if not match.empty:
+                    row = match.iloc[0]
+                    eco_info = f"""
+                    🛒 Product: {row['product_name']} ({row['brand']})
+                    🌿 Eco Rating: {row['eco_rating']}/5  
+                    ♻️ Suggested Alternative: {row['eco_alternative']}
+                    📦 Packaging Type: {row['packaging']}
+                    💨 Carbon Footprint: {row['carbon_footprint']} kg CO₂  
+                    🔁 Recyclability: {row['recyclability']}
+                    💡 Eco Tip: {row['eco_tip']}
+                    """
+                    st.markdown(eco_info)
+                    st.session_state.history.append({"name": row['product_name'], "eco_rating": row['eco_rating']})
+                else:
+                    st.error("Product not found in database.")
             else:
-                st.error("Product not found in database.")
-        else:
-            st.warning("No barcode detected.")
+                st.warning("No barcode detected.")
 
 
     # --------- User History ---------
