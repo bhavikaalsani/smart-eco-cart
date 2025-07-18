@@ -1,7 +1,7 @@
-product_id,product_name,category,brand,eco_rating,eco_alternative,packaging_type,carbon_score,recyclability,eco_tip
-101,Bisleri Water Bottle,bottle,Bisleri,2,Refillable Stainless Steel Bottle,Plastic,1.2,Fully Recyclable,Use a steel bottle and reduce single-use plastic.
-102,Coca-Cola Can,can,Coca-Cola,1,Fresh Juice in Reusable Glass Bottle,Aluminum,1.8,Fully Recyclable,Glass bottles have a 4x reuse lifecycle.
-103,Lays Classic Chips,packet,Lays,2,Baked Banana Chips in Paper Wrap,Multi-layer Plastic,2.5,Not Recyclable,Try homemade chips with paper wraps.
-104,Dettol Soap Bar,soap,Dettol,3,Organic Neem Soap,Paper,0.5,Fully Recyclable,Handmade soap avoids microplastic beads.
-105,Plastic Shopping Bag,bag,None,1,Reusable Cloth Tote,Plastic,2.1,Not Recyclable,A cloth bag can replace 500 plastic bags/year.
-106,Pepsi PET Bottle,bottle,Pepsi,1,Copper Refill Bottle,Plastic,1.4,Partially Recyclable,Try refill stations for soft drinks.
+product_name,brand,detected_name,barcode,eco_rating,eco_alternative,packaging,carbon_footprint,recyclability,eco_tip,category
+Bisleri Water Bottle,Bisleri,bottle,8901234567890,2,Refillable Stainless Steel Bottle,Plastic,1.2,Fully Recyclable,Use a steel bottle and reduce single-use plastic.,urban
+Pepsi PET Bottle,Pepsi,bottle,8909876543210,1,Copper Refill Bottle,Plastic,1.4,Partially Recyclable,Try refill stations for soft drinks.,urban
+Coca-Cola Can,Coca-Cola,can,8901112223334,1,Fresh Juice in Glass Bottle,Aluminum,1.8,Fully Recyclable,Glass bottles have a 4x reuse lifecycle.,urban
+Lays Classic Chips,Lays,packet,8904445556667,2,Baked Banana Chips in Paper Wrap,Multi-layer Plastic,2.5,Not Recyclable,Try homemade chips with paper wraps.,rural
+Dettol Soap Bar,Dettol,soap,8905556667771,3,Organic Neem Soap,Paper,0.5,Fully Recyclable,Handmade soap avoids microplastic beads.,rural
+Plastic Shopping Bag,None,bag,8902223334448,1,Reusable Cloth Tote,Plastic,2.1,Not Recyclable,A cloth bag can replace 500 plastic bags/year.,urban
