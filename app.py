@@ -7,6 +7,7 @@ from PIL import Image
 from ultralytics import YOLO
 import tempfile
 import os
+import numpy as np
 
 # Load YOLO model
 model = YOLO('yolov8n.pt')  # You can choose your custom model if available
