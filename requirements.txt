@@ -1,5 +1,7 @@
 streamlit
+opencv-python
 ultralytics
-opencv-python-headless
+pyzbar
+pillow
+numpy
 pandas
-Pillow
