@@ -5,7 +5,6 @@ import pandas as pd
 import cv2
 from PIL import Image
 from ultralytics import YOLO
-from pyzbar.pyzbar import decode
 import tempfile
 import os
 
@@ -65,36 +64,33 @@ if st.session_state.user:
                     st.session_state.history.append({"name": row['product_name'], "eco_rating": row['eco_rating']})
 
     # --------- Barcode Scanner ---------
-    with tab2:
-        st.title("📷 Scan Barcode")
-        picture = st.camera_input("Scan barcode on product")
+  with tab2:
+    st.title("📷 Scan Barcode")
+    picture = st.camera_input("Scan barcode on product")
 
-        if picture:
-            img = Image.open(picture)
-            img_cv = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-            barcodes = decode(img_cv)
-
-            if barcodes:
-                barcode_data = barcodes[0].data.decode('utf-8')
-                st.success(f"Scanned Barcode: {barcode_data}")
-                match = product_db[product_db['barcode'] == barcode_data]
-                if not match.empty:
-                    row = match.iloc[0]
-                    eco_info = f"""
-                    🛒 Product: {row['product_name']} ({row['brand']})
-                    🌿 Eco Rating: {row['eco_rating']}/5
-                    ♻️ Suggested Alternative: {row['eco_alternative']}
-                    📦 Packaging Type: {row['packaging']}
-                    💨 Carbon Footprint: {row['carbon_footprint']} kg CO₂
-                    🔁 Recyclability: {row['recyclability']}
-                    💡 Eco Tip: {row['eco_tip']}
-                    """
-                    st.markdown(eco_info)
-                    st.session_state.history.append({"name": row['product_name'], "eco_rating": row['eco_rating']})
-                else:
-                    st.error("Product not found in database.")
+    if picture:
+        barcode_data = decode_barcode_with_zxing(picture.getvalue())
+        if barcode_data:
+            st.success(f"Scanned Barcode: {barcode_data}")
+            match = product_db[product_db['barcode'] == barcode_data]
+            if not match.empty:
+                row = match.iloc[0]
+                eco_info = f"""
+                🛒 Product: {row['product_name']} ({row['brand']})
+                🌿 Eco Rating: {row['eco_rating']}/5  
+                ♻️ Suggested Alternative: {row['eco_alternative']}
+                📦 Packaging Type: {row['packaging']}
+                💨 Carbon Footprint: {row['carbon_footprint']} kg CO₂  
+                🔁 Recyclability: {row['recyclability']}
+                💡 Eco Tip: {row['eco_tip']}
+                """
+                st.markdown(eco_info)
+                st.session_state.history.append({"name": row['product_name'], "eco_rating": row['eco_rating']})
             else:
-                st.warning("No barcode detected.")
+                st.error("Product not found in database.")
+        else:
+            st.warning("No barcode detected.")
+
 
     # --------- User History ---------
     with tab3:
